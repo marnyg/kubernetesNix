@@ -1,35 +1,19 @@
 {
-  outputs = {
-    self,
-    nixpkgs,
-  }:
-    nixosModules.base = {pkgs, ...}: {
-      system.stateVersion = "22.05";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    flake-root.url = "github:srid/flake-root";
+  };
 
-      # Configure networking
-      networking.useDHCP = false;
-      networking.interfaces.eth0.useDHCP = true;
-
-      # Create user "test"
-      services.getty.autologinUser = "test";
-      users.users.test.isNormalUser = true;
-
-      # Enable passwordless ‘sudo’ for the "test" user
-      users.users.test.extraGroups = ["wheel"];
-      security.sudo.wheelNeedsPassword = false;
-    };
-
-
-    nixosModules.vm = {...}: {
-      # Make VM output to the terminal instead of a separate window
-      virtualisation.vmVariant.virtualisation.graphics = false;
-    };
-    nixosConfigurations.linuxVM = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        self.nixosModules.base
-        self.nixosModules.vm
+  outputs = inputs@{ ... }:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+      imports = [
+        ./modules/base.nix
+        ./modules/kubernetesOs.nix
+        inputs.treefmt-nix.flakeModule
+        inputs.flake-root.flakeModule
       ];
     };
-  };
 }
