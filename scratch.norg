@@ -1,16 +1,10 @@
 
 
-* scrach 
 
 * notes
 ** look in to using easyconfigi for personal os flake
    https://flake.parts/options/ez-configs
-** try using missionControle for project scripts in flake 
-   https://flake.parts/options/mission-control
-   - makes scripts easily accable via f.ex `, fmt`
-   - allows for docs and catigorisation per command
 ** look into what dream2nix is 
-   https://flake.parts/options/dream2nix
 
 * todos
 ** ( ) start a kubernetes cluster in a wm
