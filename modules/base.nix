@@ -27,21 +27,24 @@
 
     devShells.default = pkgs.mkShell
       {
-        buildInputs = [ pkgs.nixd pkgs.rnix-lsp ];
-        LSP_SERVERS = "rnix, nixd";
+        buildInputs = [ pkgs.nixd pkgs.rnix-lsp pkgs.nil ];
+        #LSP_SERVERS = "rnix, nixd, nil_ls";
+        LSP_SERVERS = "nixd, nil_ls";
         shellHook = "${config.pre-commit.installationScript}";
         inputsFrom = [ config.mission-control.devShell ];
       };
-    # devShells.a = config.pre-commit.devShell;
 
-    pre-commit.settings.hooks.nixpkgs-fmt.enable = true;
-    # pre-commit.settings.hooks.cspell.enable = true;
-    pre-commit.settings.hooks.deadnix.enable = true;
-    pre-commit.settings.hooks.nil.enable = true;
-    pre-commit.settings.hooks.statix.enable = true;
-    pre-commit.settings.hooks.typos.enable = true;
-    pre-commit.settings.hooks.yamllint.enable = true;
-    pre-commit.settings.settings.statix.format = "stderr";
+    pre-commit = {
+      settings.hooks.nixpkgs-fmt.enable = true;
+      settings.hooks.deadnix.enable = true;
+      settings.hooks.nil.enable = true;
+      settings.hooks.statix.enable = true;
+      settings.hooks.typos.enable = true;
+      settings.hooks.yamllint.enable = true;
+      settings.settings.statix.format = "stderr";
+
+    };
+
 
     formatter = config.treefmt.build.wrapper;
 

@@ -1,10 +1,20 @@
 
-
-
 * notes
+** try bundeling the base.nix config into its own flake-module
+*** probobly want to have separate flake, such that i can isolate inputs to that repo
 ** look in to using easyconfigi for personal os flake
    https://flake.parts/options/ez-configs
 ** look into what dream2nix is 
+** see if i can make my nixos non dependent on the inputs of the flake
+   if a module is dependnt on a non standard input, it is either non generalizable  
+   or it needs to check if the attributes is not null. 
+   ie firefox must check if `pkgs.nur` exists
+** experiment with erlang 
+*** want to try out elixir, pheonix, gleam, 
+*** want to try out clustering via tailscale
+*** want to try out deploying it on fly.io
+*** want to try out how reliable is the BEAM
+*** could you use elixir and nix as an alternativ stack to kubernetes and docker?
 
 * todos
 ** ( ) start a kubernetes cluster in a wm
