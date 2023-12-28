@@ -40,9 +40,9 @@
       settings.hooks.nil.enable = true;
       settings.hooks.statix.enable = true;
       settings.hooks.typos.enable = true;
+      settings.hooks.commitizen.enable = true;
       settings.hooks.yamllint.enable = true;
       settings.settings.statix.format = "stderr";
-
     };
 
 
